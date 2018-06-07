@@ -1,6 +1,7 @@
-bin_PROGRAMS = bubble cocktail
+bin_PROGRAMS = bubble cocktail selectionSort
 bubble_SOURCES = src/bubbleSort.c
 cocktail_SOURCES = src/cocktailSort.c
+selectionSort_SOURCES = src/selectionSort.c
 
 INCLUDES = -I $(top_srcdir)/src
 
