@@ -50,7 +50,7 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 bin_PROGRAMS = bubble$(EXEEXT) cocktail$(EXEEXT) \
-	selectionSort$(EXEEXT)
+	selectionSort$(EXEEXT) insertionSort$(EXEEXT)
 subdir = .
 DIST_COMMON = $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
@@ -73,6 +73,10 @@ bubble_LDADD = $(LDADD)
 am_cocktail_OBJECTS = cocktailSort.$(OBJEXT)
 cocktail_OBJECTS = $(am_cocktail_OBJECTS)
 cocktail_LDADD = $(LDADD)
+am_insertionSort_OBJECTS = insertionSort.$(OBJEXT) \
+	create_rand.$(OBJEXT)
+insertionSort_OBJECTS = $(am_insertionSort_OBJECTS)
+insertionSort_LDADD = $(LDADD)
 am_selectionSort_OBJECTS = selectionSort.$(OBJEXT) \
 	create_rand.$(OBJEXT)
 selectionSort_OBJECTS = $(am_selectionSort_OBJECTS)
@@ -86,9 +90,9 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 SOURCES = $(bubble_SOURCES) $(cocktail_SOURCES) \
-	$(selectionSort_SOURCES)
+	$(insertionSort_SOURCES) $(selectionSort_SOURCES)
 DIST_SOURCES = $(bubble_SOURCES) $(cocktail_SOURCES) \
-	$(selectionSort_SOURCES)
+	$(insertionSort_SOURCES) $(selectionSort_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -203,6 +207,9 @@ cocktail_SOURCES = src/cocktailSort.c
 selectionSort_SOURCES = src/selectionSort.c \
 						src/create_rand.h src/create_rand.c
 
+insertionSort_SOURCES = src/insertionSort.c \
+						src/create_rand.h src/create_rand.c
+
 INCLUDES = -I $(top_srcdir)/src
 EXTRA_DIST = autogen.sh \
 			 README.md
@@ -307,6 +314,9 @@ bubble$(EXEEXT): $(bubble_OBJECTS) $(bubble_DEPENDENCIES) $(EXTRA_bubble_DEPENDE
 cocktail$(EXEEXT): $(cocktail_OBJECTS) $(cocktail_DEPENDENCIES) $(EXTRA_cocktail_DEPENDENCIES) 
 	@rm -f cocktail$(EXEEXT)
 	$(LINK) $(cocktail_OBJECTS) $(cocktail_LDADD) $(LIBS)
+insertionSort$(EXEEXT): $(insertionSort_OBJECTS) $(insertionSort_DEPENDENCIES) $(EXTRA_insertionSort_DEPENDENCIES) 
+	@rm -f insertionSort$(EXEEXT)
+	$(LINK) $(insertionSort_OBJECTS) $(insertionSort_LDADD) $(LIBS)
 selectionSort$(EXEEXT): $(selectionSort_OBJECTS) $(selectionSort_DEPENDENCIES) $(EXTRA_selectionSort_DEPENDENCIES) 
 	@rm -f selectionSort$(EXEEXT)
 	$(LINK) $(selectionSort_OBJECTS) $(selectionSort_LDADD) $(LIBS)
@@ -320,6 +330,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bubbleSort.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cocktailSort.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/create_rand.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/insertionSort.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/selectionSort.Po@am__quote@
 
 .c.o:
@@ -364,19 +375,19 @@ cocktailSort.obj: src/cocktailSort.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o cocktailSort.obj `if test -f 'src/cocktailSort.c'; then $(CYGPATH_W) 'src/cocktailSort.c'; else $(CYGPATH_W) '$(srcdir)/src/cocktailSort.c'; fi`
 
-selectionSort.o: src/selectionSort.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT selectionSort.o -MD -MP -MF $(DEPDIR)/selectionSort.Tpo -c -o selectionSort.o `test -f 'src/selectionSort.c' || echo '$(srcdir)/'`src/selectionSort.c
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/selectionSort.Tpo $(DEPDIR)/selectionSort.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/selectionSort.c' object='selectionSort.o' libtool=no @AMDEPBACKSLASH@
+insertionSort.o: src/insertionSort.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT insertionSort.o -MD -MP -MF $(DEPDIR)/insertionSort.Tpo -c -o insertionSort.o `test -f 'src/insertionSort.c' || echo '$(srcdir)/'`src/insertionSort.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/insertionSort.Tpo $(DEPDIR)/insertionSort.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/insertionSort.c' object='insertionSort.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o selectionSort.o `test -f 'src/selectionSort.c' || echo '$(srcdir)/'`src/selectionSort.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o insertionSort.o `test -f 'src/insertionSort.c' || echo '$(srcdir)/'`src/insertionSort.c
 
-selectionSort.obj: src/selectionSort.c
-@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT selectionSort.obj -MD -MP -MF $(DEPDIR)/selectionSort.Tpo -c -o selectionSort.obj `if test -f 'src/selectionSort.c'; then $(CYGPATH_W) 'src/selectionSort.c'; else $(CYGPATH_W) '$(srcdir)/src/selectionSort.c'; fi`
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/selectionSort.Tpo $(DEPDIR)/selectionSort.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/selectionSort.c' object='selectionSort.obj' libtool=no @AMDEPBACKSLASH@
+insertionSort.obj: src/insertionSort.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT insertionSort.obj -MD -MP -MF $(DEPDIR)/insertionSort.Tpo -c -o insertionSort.obj `if test -f 'src/insertionSort.c'; then $(CYGPATH_W) 'src/insertionSort.c'; else $(CYGPATH_W) '$(srcdir)/src/insertionSort.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/insertionSort.Tpo $(DEPDIR)/insertionSort.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/insertionSort.c' object='insertionSort.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o selectionSort.obj `if test -f 'src/selectionSort.c'; then $(CYGPATH_W) 'src/selectionSort.c'; else $(CYGPATH_W) '$(srcdir)/src/selectionSort.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o insertionSort.obj `if test -f 'src/insertionSort.c'; then $(CYGPATH_W) 'src/insertionSort.c'; else $(CYGPATH_W) '$(srcdir)/src/insertionSort.c'; fi`
 
 create_rand.o: src/create_rand.c
 @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT create_rand.o -MD -MP -MF $(DEPDIR)/create_rand.Tpo -c -o create_rand.o `test -f 'src/create_rand.c' || echo '$(srcdir)/'`src/create_rand.c
@@ -391,6 +402,20 @@ create_rand.obj: src/create_rand.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/create_rand.c' object='create_rand.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o create_rand.obj `if test -f 'src/create_rand.c'; then $(CYGPATH_W) 'src/create_rand.c'; else $(CYGPATH_W) '$(srcdir)/src/create_rand.c'; fi`
+
+selectionSort.o: src/selectionSort.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT selectionSort.o -MD -MP -MF $(DEPDIR)/selectionSort.Tpo -c -o selectionSort.o `test -f 'src/selectionSort.c' || echo '$(srcdir)/'`src/selectionSort.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/selectionSort.Tpo $(DEPDIR)/selectionSort.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/selectionSort.c' object='selectionSort.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o selectionSort.o `test -f 'src/selectionSort.c' || echo '$(srcdir)/'`src/selectionSort.c
+
+selectionSort.obj: src/selectionSort.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT selectionSort.obj -MD -MP -MF $(DEPDIR)/selectionSort.Tpo -c -o selectionSort.obj `if test -f 'src/selectionSort.c'; then $(CYGPATH_W) 'src/selectionSort.c'; else $(CYGPATH_W) '$(srcdir)/src/selectionSort.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/selectionSort.Tpo $(DEPDIR)/selectionSort.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/selectionSort.c' object='selectionSort.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o selectionSort.obj `if test -f 'src/selectionSort.c'; then $(CYGPATH_W) 'src/selectionSort.c'; else $(CYGPATH_W) '$(srcdir)/src/selectionSort.c'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
