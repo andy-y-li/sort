@@ -73,7 +73,8 @@ bubble_LDADD = $(LDADD)
 am_cocktail_OBJECTS = cocktailSort.$(OBJEXT)
 cocktail_OBJECTS = $(am_cocktail_OBJECTS)
 cocktail_LDADD = $(LDADD)
-am_selectionSort_OBJECTS = selectionSort.$(OBJEXT)
+am_selectionSort_OBJECTS = selectionSort.$(OBJEXT) \
+	create_rand.$(OBJEXT)
 selectionSort_OBJECTS = $(am_selectionSort_OBJECTS)
 selectionSort_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I.@am__isrc@
@@ -199,7 +200,9 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 bubble_SOURCES = src/bubbleSort.c
 cocktail_SOURCES = src/cocktailSort.c
-selectionSort_SOURCES = src/selectionSort.c
+selectionSort_SOURCES = src/selectionSort.c \
+						src/create_rand.h src/create_rand.c
+
 INCLUDES = -I $(top_srcdir)/src
 EXTRA_DIST = autogen.sh \
 			 README.md
@@ -316,6 +319,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bubbleSort.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cocktailSort.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/create_rand.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/selectionSort.Po@am__quote@
 
 .c.o:
@@ -373,6 +377,20 @@ selectionSort.obj: src/selectionSort.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/selectionSort.c' object='selectionSort.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o selectionSort.obj `if test -f 'src/selectionSort.c'; then $(CYGPATH_W) 'src/selectionSort.c'; else $(CYGPATH_W) '$(srcdir)/src/selectionSort.c'; fi`
+
+create_rand.o: src/create_rand.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT create_rand.o -MD -MP -MF $(DEPDIR)/create_rand.Tpo -c -o create_rand.o `test -f 'src/create_rand.c' || echo '$(srcdir)/'`src/create_rand.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/create_rand.Tpo $(DEPDIR)/create_rand.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/create_rand.c' object='create_rand.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o create_rand.o `test -f 'src/create_rand.c' || echo '$(srcdir)/'`src/create_rand.c
+
+create_rand.obj: src/create_rand.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT create_rand.obj -MD -MP -MF $(DEPDIR)/create_rand.Tpo -c -o create_rand.obj `if test -f 'src/create_rand.c'; then $(CYGPATH_W) 'src/create_rand.c'; else $(CYGPATH_W) '$(srcdir)/src/create_rand.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/create_rand.Tpo $(DEPDIR)/create_rand.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/create_rand.c' object='create_rand.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o create_rand.obj `if test -f 'src/create_rand.c'; then $(CYGPATH_W) 'src/create_rand.c'; else $(CYGPATH_W) '$(srcdir)/src/create_rand.c'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

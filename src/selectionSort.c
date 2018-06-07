@@ -16,6 +16,15 @@
  * =====================================================================================
  */
 
+#include "create_rand.h"
+#ifndef _CREATE_RAND_H
+#define _CREATE_RAND_H
+
+int create_rand(int *list,int len);
+
+
+#endif //#ifndef _CREATE_RAND_H
+
 #include <stdio.h> // 分类 -------------- 内部比较排序
 // 数据结构 ---------- 数组
 // 最差时间复杂度 ---- O(n^2)
@@ -62,5 +71,16 @@ int main()
     printf("选择排序结果：");
 
     show(A, n);
-        return 0;
+
+    //================
+    int a[100];
+    create_rand(a, 100);
+    show(a, 100);
+
+    SelectionSort(a, 100);
+    printf("选择排序结果：");
+
+    show(a, 100);
+
+    return 0;
 }
