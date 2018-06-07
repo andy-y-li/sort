@@ -15,7 +15,7 @@ int create_rand(int *list,int len)
 
 	srand((unsigned)time(&t));
 	for (i = 0;i < len;i++){
-		list[i] = rand() % 1000;
+		list[i] = rand() % 100;
 	}
 	return 0;
 }

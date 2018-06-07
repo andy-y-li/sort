@@ -50,7 +50,8 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 bin_PROGRAMS = bubble$(EXEEXT) cocktail$(EXEEXT) \
-	selectionSort$(EXEEXT) insertionSort$(EXEEXT)
+	selectionSort$(EXEEXT) insertionSort$(EXEEXT) \
+	insertionSortDichotomy$(EXEEXT)
 subdir = .
 DIST_COMMON = $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
@@ -77,6 +78,10 @@ am_insertionSort_OBJECTS = insertionSort.$(OBJEXT) \
 	create_rand.$(OBJEXT)
 insertionSort_OBJECTS = $(am_insertionSort_OBJECTS)
 insertionSort_LDADD = $(LDADD)
+am_insertionSortDichotomy_OBJECTS = insertionSortDichotomy.$(OBJEXT) \
+	create_rand.$(OBJEXT)
+insertionSortDichotomy_OBJECTS = $(am_insertionSortDichotomy_OBJECTS)
+insertionSortDichotomy_LDADD = $(LDADD)
 am_selectionSort_OBJECTS = selectionSort.$(OBJEXT) \
 	create_rand.$(OBJEXT)
 selectionSort_OBJECTS = $(am_selectionSort_OBJECTS)
@@ -90,9 +95,11 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 SOURCES = $(bubble_SOURCES) $(cocktail_SOURCES) \
-	$(insertionSort_SOURCES) $(selectionSort_SOURCES)
+	$(insertionSort_SOURCES) $(insertionSortDichotomy_SOURCES) \
+	$(selectionSort_SOURCES)
 DIST_SOURCES = $(bubble_SOURCES) $(cocktail_SOURCES) \
-	$(insertionSort_SOURCES) $(selectionSort_SOURCES)
+	$(insertionSort_SOURCES) $(insertionSortDichotomy_SOURCES) \
+	$(selectionSort_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -210,6 +217,9 @@ selectionSort_SOURCES = src/selectionSort.c \
 insertionSort_SOURCES = src/insertionSort.c \
 						src/create_rand.h src/create_rand.c
 
+insertionSortDichotomy_SOURCES = src/insertionSortDichotomy.c \
+						src/create_rand.h src/create_rand.c
+
 INCLUDES = -I $(top_srcdir)/src
 EXTRA_DIST = autogen.sh \
 			 README.md
@@ -317,6 +327,9 @@ cocktail$(EXEEXT): $(cocktail_OBJECTS) $(cocktail_DEPENDENCIES) $(EXTRA_cocktail
 insertionSort$(EXEEXT): $(insertionSort_OBJECTS) $(insertionSort_DEPENDENCIES) $(EXTRA_insertionSort_DEPENDENCIES) 
 	@rm -f insertionSort$(EXEEXT)
 	$(LINK) $(insertionSort_OBJECTS) $(insertionSort_LDADD) $(LIBS)
+insertionSortDichotomy$(EXEEXT): $(insertionSortDichotomy_OBJECTS) $(insertionSortDichotomy_DEPENDENCIES) $(EXTRA_insertionSortDichotomy_DEPENDENCIES) 
+	@rm -f insertionSortDichotomy$(EXEEXT)
+	$(LINK) $(insertionSortDichotomy_OBJECTS) $(insertionSortDichotomy_LDADD) $(LIBS)
 selectionSort$(EXEEXT): $(selectionSort_OBJECTS) $(selectionSort_DEPENDENCIES) $(EXTRA_selectionSort_DEPENDENCIES) 
 	@rm -f selectionSort$(EXEEXT)
 	$(LINK) $(selectionSort_OBJECTS) $(selectionSort_LDADD) $(LIBS)
@@ -331,6 +344,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cocktailSort.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/create_rand.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/insertionSort.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/insertionSortDichotomy.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/selectionSort.Po@am__quote@
 
 .c.o:
@@ -402,6 +416,20 @@ create_rand.obj: src/create_rand.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/create_rand.c' object='create_rand.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o create_rand.obj `if test -f 'src/create_rand.c'; then $(CYGPATH_W) 'src/create_rand.c'; else $(CYGPATH_W) '$(srcdir)/src/create_rand.c'; fi`
+
+insertionSortDichotomy.o: src/insertionSortDichotomy.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT insertionSortDichotomy.o -MD -MP -MF $(DEPDIR)/insertionSortDichotomy.Tpo -c -o insertionSortDichotomy.o `test -f 'src/insertionSortDichotomy.c' || echo '$(srcdir)/'`src/insertionSortDichotomy.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/insertionSortDichotomy.Tpo $(DEPDIR)/insertionSortDichotomy.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/insertionSortDichotomy.c' object='insertionSortDichotomy.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o insertionSortDichotomy.o `test -f 'src/insertionSortDichotomy.c' || echo '$(srcdir)/'`src/insertionSortDichotomy.c
+
+insertionSortDichotomy.obj: src/insertionSortDichotomy.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT insertionSortDichotomy.obj -MD -MP -MF $(DEPDIR)/insertionSortDichotomy.Tpo -c -o insertionSortDichotomy.obj `if test -f 'src/insertionSortDichotomy.c'; then $(CYGPATH_W) 'src/insertionSortDichotomy.c'; else $(CYGPATH_W) '$(srcdir)/src/insertionSortDichotomy.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/insertionSortDichotomy.Tpo $(DEPDIR)/insertionSortDichotomy.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/insertionSortDichotomy.c' object='insertionSortDichotomy.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o insertionSortDichotomy.obj `if test -f 'src/insertionSortDichotomy.c'; then $(CYGPATH_W) 'src/insertionSortDichotomy.c'; else $(CYGPATH_W) '$(srcdir)/src/insertionSortDichotomy.c'; fi`
 
 selectionSort.o: src/selectionSort.c
 @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT selectionSort.o -MD -MP -MF $(DEPDIR)/selectionSort.Tpo -c -o selectionSort.o `test -f 'src/selectionSort.c' || echo '$(srcdir)/'`src/selectionSort.c
