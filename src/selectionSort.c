@@ -40,15 +40,6 @@ void Swap(int A[], int i, int j)
     A[j] = temp;
 }
 
-void show(int *A, int n)
-{
-    for (int i = 0; i < n; i++ )
-    {
-        printf("%d ", A[i]);
-    }
-    printf("\n");
-}
-
 void SelectionSort(int A[], int n) {
     for (int i = 0; i < n - 1; i++) {
         int min = i;
